@@ -1,4 +1,3 @@
-const ideas = [];
 const db = require("../modelos/database/dataBase");
 
 module.exports = {
