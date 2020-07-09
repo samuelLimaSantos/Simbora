@@ -1,4 +1,5 @@
 const ideas = [];
+const db = require("../modelos/database/dataBase");
 
 module.exports = {
   checkOptionalLinkIsEmpty(req, res, next) {
@@ -14,21 +15,45 @@ module.exports = {
   },
 
   showAll(req, res) {
-    return res.json(ideas);
+    db.all(`SELECT * FROM ideas`, (err, rows) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      const dados = rows;
+
+      return res.json(dados);
+    });
   },
 
-  showOnlyOneIdea(req, res) {
+  showIdeaPerID(req, res) {
     const { id } = req.params;
 
-    const index = ideas.findIndex((item) => {
-      return item.id === id;
-    });
+    db.all(`SELECT * FROM ideas WHERE id = ${id}`, (err, row) => {
+      if (err) {
+        return console.log(err);
+      }
 
-    return res.json(ideas[index]);
+      return res.json(row);
+    });
+  },
+
+  showIdeaPerCategory(req, res) {
+    const { category } = req.params;
+
+    db.all(
+      `SELECT * FROM ideas WHERE category LIKE '%${category}%' `,
+      (err, rows) => {
+        if (err) {
+          return console.log(err);
+        }
+
+        return res.json(rows);
+      }
+    );
   },
 
   createIdea(req, res) {
-    const { id } = req.body;
     const { author } = req.body;
     const { title } = req.body;
     const { description } = req.body;
@@ -36,55 +61,40 @@ module.exports = {
     const { optionalLink } = req;
     const { Category } = req.body;
 
-    const idea = {
-      id,
-      author,
-      title,
-      description,
-      linkImg,
-      optionalLink,
-      Category,
-    };
-    ideas.push(idea);
-    return res.json(ideas);
+    const idea = [author, title, description, linkImg, optionalLink, Category];
+
+    const query = `
+      INSERT INTO ideas (
+        author,
+        title,
+        description,
+        linkImg,
+        linkMoreDetails,
+        category
+      ) VALUES (?,?,?,?,?,?);
+    `;
+
+    function afterInsertData(err) {
+      if (err) {
+        return console.log(err);
+      }
+
+      console.log("Cadastrado com sucesso");
+      return res.json(this);
+    }
+
+    db.run(query, idea, afterInsertData);
   },
 
   deleteIdea(req, res) {
     const { id } = req.params;
 
-    const index = ideas.findIndex((item) => {
-      return item.id === id;
+    db.run(`DELETE FROM ideas WHERE id = ${Number(id)}`, (err) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      return res.send("Ideia deletada com sucesso!");
     });
-
-    ideas.splice(index, 1);
-
-    return res.json(ideas);
-  },
-
-  updateIdea(req, res) {
-    const { id } = req.params;
-    const { author } = req.body;
-    const { title } = req.body;
-    const { description } = req.body;
-    const { linkImg } = req.body;
-    const { optionalLink } = req;
-    const { Category } = req.body;
-    const newIdea = {
-      id,
-      author,
-      title,
-      description,
-      linkImg,
-      optionalLink,
-      Category,
-    };
-
-    const index = ideas.findIndex((item) => {
-      return item.id === id;
-    });
-
-    ideas[index] = newIdea;
-
-    return res.json(ideas);
   },
 };
