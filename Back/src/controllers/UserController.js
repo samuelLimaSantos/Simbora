@@ -1,4 +1,23 @@
-const db = require("../modelos/database/dataBase");
+const db = require("../models/database/db");
+
+function construirQuery(arrayCategories) {
+  var names = "";
+  var historico = arrayCategories[0];
+  for (let i = 0; i < arrayCategories.length; i++) {
+    if (i === 0) {
+      names = `"` + arrayCategories[0] + `"`;
+      continue;
+    }
+
+    if (i < arrayCategories.length) {
+      historico += "," + arrayCategories[i];
+    }
+
+    names += `, "` + historico + `"`;
+  }
+
+  return names;
+}
 
 module.exports = {
   checkOptionalLinkIsEmpty(req, res, next) {
@@ -13,8 +32,42 @@ module.exports = {
     return next();
   },
 
-  showAll(req, res) {
+  checkLocationsIsEmpty(req, res, next) {
+    const { state } = req.body;
+    const { city } = req.body;
+    const { address } = req.body;
+
+    if (state == "" || city == "") {
+      req.estado = "Null";
+      req.cidade = "Null";
+      req.endereco = "Null";
+      req.type = "remoto";
+
+      return next();
+    }
+
+    req.estado = state;
+    req.cidade = city;
+    req.endereco = address;
+    req.type = "local";
+
+    return next();
+  },
+
+  showAllIdeas(req, res) {
     db.all(`SELECT * FROM ideas`, (err, rows) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      const dados = rows;
+
+      return res.json(dados);
+    });
+  },
+
+  showAllRemoteIdeas(req, res) {
+    db.all(`SELECT * FROM ideas WHERE type = 'remoto'`, (err, rows) => {
       if (err) {
         return console.log(err);
       }
@@ -37,11 +90,34 @@ module.exports = {
     });
   },
 
-  showIdeaPerCategory(req, res) {
-    const { category } = req.params;
+  showIdeasPerState(req, res) {
+    const { state } = req.params;
 
     db.all(
-      `SELECT * FROM ideas WHERE category LIKE '%${category}%' `,
+      `SELECT * FROM ideas WHERE type = 'local' AND state = '${state}'`,
+      (err, rows) => {
+        if (err) {
+          return console.log(err);
+        }
+
+        const dados = rows;
+
+        return res.json(dados);
+      }
+    );
+  },
+
+  showIdeaPerCategory(req, res) {
+    const { type } = req.params;
+    const { category } = req.params;
+
+    const arrayCategories = category.split(",").sort();
+
+    console.log(arrayCategories);
+    const query = construirQuery(arrayCategories);
+
+    db.all(
+      `SELECT * FROM ideas WHERE type = '${type}' AND category IN (${query})`,
       (err, rows) => {
         if (err) {
           return console.log(err);
@@ -55,22 +131,43 @@ module.exports = {
   createIdea(req, res) {
     const { author } = req.body;
     const { title } = req.body;
-    const { description } = req.body;
     const { linkImg } = req.body;
+    const { description } = req.body;
+    const { estado } = req;
+    const { cidade } = req;
+    const { endereco } = req;
     const { optionalLink } = req;
-    const { Category } = req.body;
+    const { type } = req;
+    const { category } = req.body;
 
-    const idea = [author, title, description, linkImg, optionalLink, Category];
+    const categories = category.split(",").sort().toString();
+
+    const idea = [
+      title,
+      author,
+      linkImg,
+      description,
+      estado,
+      cidade,
+      endereco,
+      optionalLink,
+      type,
+      categories,
+    ];
 
     const query = `
       INSERT INTO ideas (
-        author,
         title,
-        description,
+        author,
         linkImg,
+        description,
+        state,
+        city,
+        address,
         linkMoreDetails,
+        type,
         category
-      ) VALUES (?,?,?,?,?,?);
+      ) VALUES (?,?,?,?,?,?,?,?,?,?);
     `;
 
     function afterInsertData(err) {
@@ -87,13 +184,17 @@ module.exports = {
 
   deleteIdea(req, res) {
     const { id } = req.params;
+    const { type } = req.params;
 
-    db.run(`DELETE FROM ideas WHERE id = ${Number(id)}`, (err) => {
-      if (err) {
-        return console.log(err);
+    db.run(
+      `DELETE FROM ideas WHERE type = '${type}' AND id = '${Number(id)}'`,
+      (err) => {
+        if (err) {
+          return console.log(err);
+        }
+
+        return res.send("Ideia deletada com sucesso!");
       }
-
-      return res.send("Ideia deletada com sucesso!");
-    });
+    );
   },
 };
