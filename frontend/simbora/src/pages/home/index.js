@@ -21,10 +21,6 @@ const Home = () => {
                 <strong className="highlight-text"> alcance.</strong>
               </h1>
               <h5>
-                Você se encontra no tédio, atrás de idéias para melhorar o seu
-                dia e tudo isso na palma da sua mão?
-                <br />
-                <br />
                 Com o<strong className="highlight-text"> Simbora </strong>
                 você pode compartilhar suas ideias e ter
                 <strong className="highlight-text"> acesso </strong>a todas as
