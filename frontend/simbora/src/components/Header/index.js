@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 export default class Header extends Component {
+  constructor(props) {
+    super();
+  }
+
   render() {
     return (
       <div className="header">
@@ -18,15 +22,15 @@ export default class Header extends Component {
               <li>Inicio</li>
             </Link>
 
-            <Link to="/create-idea">
+            <Link to="/show-ideas">
               <li>Ideias</li>
             </Link>
-            <Link to="/show-ideas">
+            <Link to="/about-us">
               <li>Sobre nós</li>
             </Link>
           </ul>
 
-          <Button text={"Nova Ideia"} link="/create-idea" />
+          <Button text={this.props.status} link={this.props.link} />
         </header>
       </div>
     );

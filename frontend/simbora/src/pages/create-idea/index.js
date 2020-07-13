@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 const CreateIdea = () => {
   return (
     <div>
-      <Header />
+      <Header status={"Voltar"} link={"/"} />
       <h1>Create Idea</h1>
     </div>
   );

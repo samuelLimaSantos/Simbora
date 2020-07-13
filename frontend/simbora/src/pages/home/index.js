@@ -10,7 +10,7 @@ import friendsImage from "../../assets/Comida.svg";
 const Home = () => {
   return (
     <div className="father">
-      <Header />
+      <Header status={"Nova Ideia"} link={"/create-idea"} />
       <div className="container">
         <main className="content-home">
           <section id="caixa">
