@@ -23,7 +23,7 @@ module.exports = {
   checkOptionalLinkIsEmpty(req, res, next) {
     const { linkMoreDetails } = req.body;
 
-    if (linkMoreDetails === "") {
+    if (!linkMoreDetails) {
       req.optionalLink = "Null";
       return next();
     }
@@ -37,7 +37,7 @@ module.exports = {
     const { city } = req.body;
     const { address } = req.body;
 
-    if (state == "" || city == "") {
+    if (!state || !city) {
       req.estado = "Null";
       req.cidade = "Null";
       req.endereco = "Null";
