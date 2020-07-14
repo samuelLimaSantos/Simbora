@@ -15,17 +15,15 @@ export default class Modal extends Component {
     };
   }
 
-  componentDidMount(props) {
-    console.log(props);
-  }
-
   async Populate() {
     const ufSelect = document.querySelector("#uf");
     const url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
     const states = await axios.get(url);
     const dados = states.data;
     dados.map((item) => {
-      return (ufSelect.innerHTML += `<option value = ${item.nome}>${item.nome}</option>`);
+      return (ufSelect.innerHTML += `<option value = ${"'" + item.nome + "'"}>${
+        item.nome
+      }</option>`);
     });
   }
   render() {

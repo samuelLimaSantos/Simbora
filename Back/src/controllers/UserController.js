@@ -129,6 +129,7 @@ module.exports = {
   },
 
   createIdea(req, res) {
+    console.log(req.body);
     const { author } = req.body;
     const { title } = req.body;
     const { linkImg } = req.body;
