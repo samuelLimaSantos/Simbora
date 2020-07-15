@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Header from "../../components/Header";
 import Modal from "../../components/ModalChoseCategory";
-import axios from "axios";
 
 export default class ShowIdeas extends Component {
   state = {

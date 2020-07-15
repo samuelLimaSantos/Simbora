@@ -1,6 +1,7 @@
 .father {
   height: 100%;
   display: grid;
+  width: 100vw;
   grid-template-rows: 1fr 15fr;
 }
 

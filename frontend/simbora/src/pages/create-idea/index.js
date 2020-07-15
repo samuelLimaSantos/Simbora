@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../components/Header";
 import Forms from "../../components/forms";
+import backAsset from "../../assets/back.svg";
 import localAsset from "../../assets/Local.svg";
 import remoteAsset from "../../assets/Remote.svg";
 import "./style.css";
@@ -49,8 +50,32 @@ export default class CreateIdea extends Component {
             </section>
           )}
 
-          {this.state.type === "local" && <Forms Status={true} />}
-          {this.state.type === "remoto" && <Forms Status={false} />}
+          {this.state.type === "local" && (
+            <div className="forms-datas">
+              <img
+                src={backAsset}
+                alt="back-Icon"
+                width="40px"
+                onClick={() => {
+                  this.setState({ type: "" });
+                }}
+              />
+              <Forms Status={true} />
+            </div>
+          )}
+          {this.state.type === "remoto" && (
+            <div className="forms-datas">
+              <img
+                src={backAsset}
+                alt="back-Icon"
+                width="40px"
+                onClick={() => {
+                  this.setState({ type: "" });
+                }}
+              />
+              <Forms Status={false} />
+            </div>
+          )}
         </div>
       </div>
     );

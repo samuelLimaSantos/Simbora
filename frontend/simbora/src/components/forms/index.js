@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "./styles.css";
 
 export default class Forms extends Component {
   constructor(props) {
@@ -124,15 +126,18 @@ export default class Forms extends Component {
     }
   }
 
+  showSucessfull() {
+    document.querySelector(
+      ".container-forms-create"
+    ).innerHTML = `<h1>Cadastro Realizado com sucesso</h1>`;
+  }
+
   render() {
     return (
       <div className="container-forms-create">
-        <div className="mini-header">
-          <img src="" alt="" />
-          <h2>Pensou em algo?</h2>
-        </div>
+        <h2>Pensou em algo?</h2>
         <h1>Compartilhe com a gente!</h1>
-        <form>
+        <div className="datas">
           <fieldset>
             <legend>
               <h2>Dados da ideia:</h2>
@@ -142,10 +147,14 @@ export default class Forms extends Component {
               <input type="text" name="title" required />
             </div>
             <div className="double-collum">
-              <label htmlFor="author">Autor:</label>
-              <input type="text" name="author" required />
-              <label htmlFor="linkImg">Link da Imagem:</label>
-              <input type="url" name="linkImg" required />
+              <div>
+                <label htmlFor="author">Autor:</label>
+                <input type="text" name="author" required />
+              </div>
+              <div>
+                <label htmlFor="linkImg">Link da Imagem:</label>
+                <input type="url" name="linkImg" required />
+              </div>
             </div>
             <div className="single-collum">
               <label htmlFor="description">Descrição</label>
@@ -159,17 +168,21 @@ export default class Forms extends Component {
             {this.props.Status === true && (
               <div>
                 <div className="double-collum">
-                  <label htmlFor="state">Estado:</label>
-                  <select name="uf" required>
-                    <option value="">Selecione o Estado</option>
-                  </select>
-                  <input type="hidden" name="state" />
+                  <div>
+                    <label htmlFor="state">Estado:</label>
+                    <select name="uf" required>
+                      <option value="">Selecione o Estado</option>
+                    </select>
+                    <input type="hidden" name="state" />
+                  </div>
 
-                  <label htmlFor="cidade">Cidade:</label>
-                  <select name="cidade" disabled required>
-                    <option value="">Selecione a cidade</option>
-                  </select>
-                  <input type="hidden" name="city" />
+                  <div>
+                    <label htmlFor="cidade">Cidade:</label>
+                    <select name="cidade" disabled required>
+                      <option value="">Selecione a cidade</option>
+                    </select>
+                    <input type="hidden" name="city" />
+                  </div>
                 </div>
                 <div className="single-collum">
                   <label htmlFor="address">Endereço</label>
@@ -177,9 +190,10 @@ export default class Forms extends Component {
                 </div>
               </div>
             )}
-
-            <label htmlFor="linkMoreDetails">Link Para mais Detalhes</label>
-            <input type="text" name="linkMoreDetails" />
+            <div className="single-collum">
+              <label htmlFor="linkMoreDetails">Link Para mais Detalhes</label>
+              <input type="text" name="linkMoreDetails" />
+            </div>
           </fieldset>
           <fieldset className="categories">
             <legend>
@@ -218,8 +232,10 @@ export default class Forms extends Component {
             </div>
             <input type="hidden" name="category" />
           </fieldset>
-          <button onClick={this.sendDatas}>Cadastrar</button>
-        </form>
+        </div>
+        <Link to="/sucessfull" onClick={this.sendDatas}>
+          Cadastrar
+        </Link>
       </div>
     );
   }

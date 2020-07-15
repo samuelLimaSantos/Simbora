@@ -60,3 +60,12 @@
 }
 
 /* Formulário */
+
+.forms-datas {
+  width: 60%;
+  height: 85%;
+}
+
+.forms-datas img {
+  cursor: pointer;
+}
