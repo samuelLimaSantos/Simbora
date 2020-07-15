@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Button from "../Button";
+import culinariaAsset from "../../assets/icon-culinaria.svg";
+import saudeAsset from "../../assets/icon-saude.svg";
+import festasAsset from "../../assets/icon-festas.svg";
+import gamesAsset from "../../assets/icon-games.svg";
+import infantilAsset from "../../assets/icon-infantil.svg";
+import viagensAsset from "../../assets/icon-viagem.svg";
 import "./styles.css";
 
 export default class Forms extends Component {
@@ -191,8 +197,8 @@ export default class Forms extends Component {
               </div>
             )}
             <div className="single-collum">
-              <label htmlFor="linkMoreDetails">Link Para mais Detalhes</label>
-              <input type="text" name="linkMoreDetails" />
+              <label htmlFor="linkMoreDetails">Link para mais Detalhes</label>
+              <input type="url" name="linkMoreDetails" />
             </div>
           </fieldset>
           <fieldset className="categories">
@@ -201,41 +207,37 @@ export default class Forms extends Component {
               <span>Selecione uma ou mais categorias abaixo</span>
             </legend>
             <div className="categories-grid">
-              <li>
-                <img src="" alt="" />
-                <span data-id="Culinária">Culinária</span>
+              <li data-id="Culinária">
+                <img src={culinariaAsset} alt="" />
+                <span>Culinária</span>
               </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Saúde e Bem-Estar">Saúde e Bem-Estar</span>
+              <li data-id="Saúde e Bem-Estar">
+                <img src={saudeAsset} alt="" />
+                <span>Saúde e Bem-Estar</span>
               </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Festas">Festas</span>
+              <li data-id="Festas">
+                <img src={festasAsset} alt="" />
+                <span>Festas</span>
               </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Games">Games</span>
+              <li data-id="Games">
+                <img src={gamesAsset} alt="" />
+                <span>Games</span>
               </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Infantil">Infantil</span>
+              <li data-id="Infantil">
+                <img src={infantilAsset} alt="" />
+                <span>Infantil</span>
               </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Saúde e Bem-Estar">Saúde e Bem-Estar</span>
-              </li>
-              <li>
-                <img src="" alt="" />
-                <span data-id="Viagens">Viagens</span>
+              <li data-id="Viagens">
+                <img src={viagensAsset} alt="" />
+                <span>Viagens</span>
               </li>
             </div>
             <input type="hidden" name="category" />
           </fieldset>
         </div>
-        <Link to="/sucessfull" onClick={this.sendDatas}>
-          Cadastrar
-        </Link>
+        <div className="submit" onClick={this.sendDatas}>
+          <Button text="Cadastrar" link="/sucessfull" />
+        </div>
       </div>
     );
   }

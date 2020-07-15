@@ -3,6 +3,10 @@
   border-radius: 12px;
 }
 
+.container-forms-create label {
+  color: rgb(61, 61, 61);
+}
+
 .container-forms-create h2 {
   text-align: center;
   color: #492400;
@@ -17,9 +21,9 @@
 
 .container-forms-create .datas {
   animation: bounceIn 1s ease-in;
-  background-color: #b7d8b7;
+  background-color: #c8e7c8;
   border: none;
-  padding: 15px;
+  padding: 20px;
   border-radius: 15px;
 }
 
@@ -53,8 +57,14 @@
   border-radius: 8px;
   border: none;
   outline: none;
-  background-color: rgb(240, 238, 238);
+  background-color: white;
   font-size: 14pt;
+  width: 100%;
+}
+
+.container-forms-create .datas .single-collum textarea {
+  font-family: "Roboto", sans-serif;
+  resize: none;
 }
 
 .container-forms-create .datas .double-collum {
@@ -76,4 +86,72 @@
 .container-forms-create .datas .double-collum div input,
 .container-forms-create .datas .double-collum div select {
   flex: 1;
+}
+
+.container-forms-create .datas .categories legend {
+  margin-bottom: 30px;
+}
+
+.container-forms-create .datas .categories legend h2 {
+  margin-bottom: 12px;
+}
+
+.container-forms-create .datas .categories legend span {
+  margin-bottom: 12px;
+  font-size: 16pt;
+}
+
+.container-forms-create .datas .categories .categories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin: 0 auto 20px auto;
+  width: 80%;
+}
+
+.container-forms-create .datas .categories .categories-grid li {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgb(137, 180, 137);
+  border-radius: 0 0 16px 16px;
+  padding: 23px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.199);
+  font-size: 14pt;
+  font-weight: 400;
+  height: 180px;
+}
+
+.container-forms-create .datas .categories .categories-grid li:hover {
+  transition: 0.5s;
+  background-color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.container-forms-create .datas .categories .categories-grid li img {
+  width: 62px;
+  pointer-events: none;
+  margin-bottom: 20px;
+}
+
+.container-forms-create .datas .categories .categories-grid li span {
+  pointer-events: none;
+}
+
+.container-forms-create .datas .categories .categories-grid li.selected {
+  transition: 0.4s;
+  color: #439257;
+  font-weight: 900;
+  /* background-color: #62b07534;
+  border: 5px solid #62b076; */
+  background-color: #ffffff6b;
+  border: 5px solid #ffffff;
+  transform: scale(1.06);
+}
+
+.submit {
+  width: 180px;
+  margin: 25px auto 20px auto;
 }
