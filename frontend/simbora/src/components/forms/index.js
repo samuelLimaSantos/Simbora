@@ -29,7 +29,7 @@ export default class Forms extends Component {
       this.setCategories();
       return;
     }
-
+    this.setCategories();
     return;
   }
 

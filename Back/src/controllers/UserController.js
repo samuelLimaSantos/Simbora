@@ -2,10 +2,18 @@ const db = require("../models/database/db");
 
 function construirQuery(arrayCategories) {
   var names = "";
+
+  for (let i = 0; i < arrayCategories.length; i++) {
+    if (i === 0) {
+      continue;
+    }
+    names += `"` + arrayCategories[i] + `",`;
+  }
+
   var historico = arrayCategories[0];
   for (let i = 0; i < arrayCategories.length; i++) {
     if (i === 0) {
-      names = `"` + arrayCategories[0] + `"`;
+      names += `"` + arrayCategories[0] + `"`;
       continue;
     }
 
@@ -13,7 +21,7 @@ function construirQuery(arrayCategories) {
       historico += "," + arrayCategories[i];
     }
 
-    names += `, "` + historico + `"`;
+    names += `,"` + historico + `"`;
   }
 
   return names;
@@ -110,14 +118,16 @@ module.exports = {
   showIdeaPerCategory(req, res) {
     const { type } = req.params;
     const { category } = req.params;
-
+    let collum = "type";
+    if (!(type === "remoto")) {
+      collum = "state";
+    }
     const arrayCategories = category.split(",").sort();
 
-    console.log(arrayCategories);
     const query = construirQuery(arrayCategories);
 
     db.all(
-      `SELECT * FROM ideas WHERE type = '${type}' AND category IN (${query})`,
+      `SELECT * FROM ideas WHERE ${collum} = '${type}' AND category IN (${query})`,
       (err, rows) => {
         if (err) {
           return console.log(err);

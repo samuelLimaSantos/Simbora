@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../components/Header";
 import Modal from "../../components/ModalChoseCategory";
+import Ideas from "../../components/Ideas";
 
 export default class ShowIdeas extends Component {
   state = {
@@ -26,11 +27,15 @@ export default class ShowIdeas extends Component {
         )}
         {this.state.mode === "remoto" && (
           <div>
-            <h2>Fazer pesquisa remota</h2>
+            <Ideas city="remoto" />
           </div>
         )}
 
-        {this.state.mode === "local" && <h1>Fazer busca {this.state.city}</h1>}
+        {this.state.mode === "local" && (
+          <div>
+            <Ideas city={this.state.city} />
+          </div>
+        )}
       </div>
     );
   }

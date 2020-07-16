@@ -83,7 +83,6 @@ export default class Modal extends Component {
                 <Link
                   onClick={() => {
                     const select = document.querySelector("select[name=uf]");
-                    console.log(select.value);
                     this.props.callbackParent(select.value, "local");
                   }}
                   to="/show-ideas"

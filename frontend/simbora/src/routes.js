@@ -5,6 +5,7 @@ import CreateIdea from "./pages/create-idea";
 import ShowIdeas from "./pages/show-ideas";
 import AboutUs from "./pages/aboutUs";
 import Sucessfull from "./pages/showSucessfull";
+import Idea from "./pages/showOnlyOneIdea";
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Routes = () => (
       <Route path="/show-ideas" component={ShowIdeas} />
       <Route path="/about-us" component={AboutUs} />
       <Route path="/sucessfull" component={Sucessfull} />
+      <Route path="/idea/:id" component={Idea} />
     </Switch>
   </BrowserRouter>
 );

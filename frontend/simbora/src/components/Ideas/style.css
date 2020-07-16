@@ -1,0 +1,8 @@
+li img {
+  width: 50px;
+  pointer-events: none;
+}
+
+li span {
+  pointer-events: none;
+}
