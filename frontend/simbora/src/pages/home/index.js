@@ -32,13 +32,22 @@ const Home = () => {
               </div>
             </div>
           </section>
-          <section className="images">
-            <img src={gameImage} alt="" />
-            <img src={funImage} alt="" />
-            <img src={joystick} alt="" />
-
-            <img src={friendsImage} alt="" />
-          </section>
+          <div className="imagens">
+            <section className="images">
+              <div>
+                <img src={gameImage} alt="" />
+              </div>
+              <div>
+                <img src={funImage} alt="" />
+              </div>
+              <div>
+                <img src={joystick} alt="" />
+              </div>
+              <div>
+                <img src={friendsImage} alt="" />
+              </div>
+            </section>
+          </div>
         </main>
       </div>
     </div>

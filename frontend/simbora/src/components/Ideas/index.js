@@ -7,6 +7,7 @@ import festasAsset from "../../assets/icon-festas.svg";
 import gamesAsset from "../../assets/icon-games.svg";
 import infantilAsset from "../../assets/icon-infantil.svg";
 import viagensAsset from "../../assets/icon-viagem.svg";
+import Button from "../../components/Button";
 import "./style.css";
 
 export default class Ideas extends Component {
@@ -78,54 +79,69 @@ export default class Ideas extends Component {
 
   render() {
     return (
-      <>
-        <nav className="">
-          <fieldset className="categories">
-            <legend>
-              <h2>Categorias</h2>
-              <span>Selecione uma ou mais categorias abaixo</span>
-            </legend>
-            <div className="categories-grid">
-              <li data-id="Culinária">
-                <img src={culinariaAsset} alt="" />
-                <span>Culinária</span>
-              </li>
-              <li data-id="Saúde e Bem-Estar">
-                <img src={saudeAsset} alt="" />
-                <span>Saúde e Bem-Estar</span>
-              </li>
-              <li data-id="Festas">
-                <img src={festasAsset} alt="" />
-                <span>Festas</span>
-              </li>
-              <li data-id="Games">
-                <img src={gamesAsset} alt="" />
-                <span>Games</span>
-              </li>
-              <li data-id="Infantil">
-                <img src={infantilAsset} alt="" />
-                <span>Infantil</span>
-              </li>
-              <li data-id="Viagens">
-                <img src={viagensAsset} alt="" />
-                <span>Viagens</span>
-              </li>
-            </div>
-            <input type="hidden" name="category" />
-          </fieldset>
-        </nav>
-        {this.state.ideas.reverse().map((ideas) => {
-          return (
-            <article key={ideas.title}>
-              <h1>{ideas.title}</h1>
-              <img src={ideas.linkImg} alt="" />
-              <p>{ideas.description}</p>
-              <p>{ideas.type}</p>
-              <Link to={`idea/${ideas.id}`}>Acessar ideia</Link>
-            </article>
-          );
-        })}
-      </>
+      <div className="ideas">
+        <header className="cabecalho">
+          <h1>Quadro de Ideias</h1>
+          <h3>Buscando ideias?</h3>
+          <h4>Confira algumas abaixo</h4>
+        </header>
+
+        <fieldset className="categories" id="categories">
+          <legend>
+            <h2>Categorias</h2>
+          </legend>
+          <div className="categories-grid" id="categories-grid">
+            <li data-id="Culinária">
+              <img src={culinariaAsset} alt="" />
+              <span>Culinária</span>
+            </li>
+            <li data-id="Saúde e Bem-Estar">
+              <img src={saudeAsset} alt="" />
+              <span>Saúde e Bem-Estar</span>
+            </li>
+            <li data-id="Festas">
+              <img src={festasAsset} alt="" />
+              <span>Festas</span>
+            </li>
+            <li data-id="Games">
+              <img src={gamesAsset} alt="" />
+              <span>Games</span>
+            </li>
+            <li data-id="Infantil">
+              <img src={infantilAsset} alt="" />
+              <span>Infantil</span>
+            </li>
+            <li data-id="Viagens">
+              <img src={viagensAsset} alt="" />
+              <span>Viagens</span>
+            </li>
+          </div>
+          <input type="hidden" name="category" />
+        </fieldset>
+
+        <section className="numberResults">
+          <h2>{this.state.ideas.length} resultados encontrados</h2>
+        </section>
+        <div className="allIdeas">
+          {this.state.ideas.reverse().map((ideas) => {
+            return (
+              <article key={ideas.title}>
+                <img src={ideas.linkImg} alt="Idea-Image" className="img" />
+                <div className="description-datas">
+                  <h1>{ideas.title}</h1>
+                  <p>{ideas.description.substring(0, 120)}...</p>
+                  <p>
+                    <strong>Categoria:</strong> {ideas.category}
+                  </p>
+                  <div>
+                    <Button text={"Acessar Ideia"} link={`idea/${ideas.id}`} />
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
     );
   }
 }

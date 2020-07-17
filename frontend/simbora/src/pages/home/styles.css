@@ -1,13 +1,12 @@
 .father {
-  height: 100%;
-  display: grid;
-  width: 100vw;
-  grid-template-rows: 1fr 15fr;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
+  flex: 1;
   justify-self: center;
-  align-self: center;
   width: 100%;
   display: flex;
   align-content: center;
@@ -18,9 +17,8 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
+  gap: 70px;
   max-width: 80%;
-  max-height: 500px;
 }
 
 .content-home #caixa {
@@ -81,10 +79,24 @@
   font-weight: lighter;
 }
 
+.content-home .imagens {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .content-home .images {
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 1fr;
+  max-height: 680px;
+  height: 80%;
+}
+.content-home .images div {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content-home .images img {

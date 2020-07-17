@@ -14,6 +14,6 @@ routes.post(
   UserController.checkLocationsIsEmpty,
   UserController.createIdea
 );
-routes.delete("/ideas/:id/:type", UserController.deleteIdea);
+routes.delete("/ideas/:id", UserController.deleteIdea);
 
 module.exports = routes;

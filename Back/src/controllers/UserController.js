@@ -195,17 +195,13 @@ module.exports = {
 
   deleteIdea(req, res) {
     const { id } = req.params;
-    const { type } = req.params;
 
-    db.run(
-      `DELETE FROM ideas WHERE type = '${type}' AND id = '${Number(id)}'`,
-      (err) => {
-        if (err) {
-          return console.log(err);
-        }
-
-        return res.send("Ideia deletada com sucesso!");
+    db.run(`DELETE FROM ideas WHERE id = '${Number(id)}'`, (err) => {
+      if (err) {
+        return console.log(err);
       }
-    );
+
+      return res.send("Ideia deletada com sucesso!");
+    });
   },
 };
