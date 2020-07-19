@@ -26,16 +26,15 @@ const AboutUs = () => {
             </h1>
             <p>
               O <span>Simbora</span> é um projeto open source desenvolvido
-              durante a disciplina <span>Projeto integrador</span>.
+              durante a disciplina Projeto integrador da Faculdade Senac
+              Pernanmbuco.
             </p>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam
-              saepe praesentium deleniti quos optio illo, suscipit ratione et
-              vel fugiat? Eos facere facilis voluptatum dolorem porro reiciendis
-              totam ex inventore? Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Minus nostrum voluptas deleniti quos culpa
-              dolore eum modi excepturi ipsam nihil quam, maxime voluptates
-              ducimus dignissimos assumenda, sit explicabo alias autem?
+              A plataforma <span>Simbora</span>, tem como principal objetivo
+              oferecer um sistema de compartilhamento de idéias e garantir uma
+              boa interatividade e bem estar entre os nossos usuários, sempre
+              buscando aperfeiçoamento e melhorias por meio de feedbacks da
+              comunidade.
             </p>
             <section
               onClick={() => {
