@@ -6,7 +6,7 @@ import reactImage from "../../assets/react.png";
 import jeffImage from "../../assets/jeff.jpeg";
 import joniImage from "../../assets/joni.jpeg";
 import victorImage from "../../assets/victor.jpeg";
-import samuelImage from "../../assets/samuel.jpg";
+import samuelImage from "../../assets/samuel.jpeg";
 import linkedinIcon from "../../assets/linkedin.svg";
 import githubIcon from "../../assets/githubIcon.svg";
 import descerIcon from "../../assets/descer.svg";
@@ -112,7 +112,7 @@ const AboutUs = () => {
                 </div>
               </section>
               <section>
-                <img src={samuelImage} alt="jeffImage" />
+                <img src={samuelImage} alt="jeffImage" className="resize" />
 
                 <div className="conteudo">
                   <h3>Samuel Santos</h3>
