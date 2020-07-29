@@ -29,7 +29,6 @@ export default class Header extends Component {
               <li>Sobre nós</li>
             </Link>
           </ul>
-
           <Button text={this.props.status} link={this.props.link} />
         </header>
       </div>
